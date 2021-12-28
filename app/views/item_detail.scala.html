@@ -1,0 +1,7 @@
+@(item: Item)
+
+@main(s"商品詳細 : ${item.name}") {
+    <h1>商品詳細 : @{item.name}</h1>
+    <p>価格 : @{item.value}円</p>
+    <a href="/items">商品一覧</a>
+}

@@ -19,6 +19,14 @@ class HomeController @Inject() (val controllerComponents: ControllerComponents) 
   def items = Action { implicit request =>
     Ok(views.html.items(itemStore))
   }
+
+  def itemDetail(id: Long) = Action {
+    itemStore.find(_.id == id).fold {
+      NotFound(views.html.not_found())
+    } { item =>
+      Ok(views.html.item_detail(item))
+    }
+  }
 }
 
 case class Item(

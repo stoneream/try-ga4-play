@@ -6,6 +6,7 @@
 # An example controller showing a sample home page
 GET / controllers.HomeController.index()
 GET /items controllers.HomeController.items()
+GET /item/:id controllers.HomeController.itemDetail(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET /assets/*file controllers.Assets.versioned(path="/public", file: Asset)
