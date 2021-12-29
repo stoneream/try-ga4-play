@@ -1,5 +1,7 @@
 package controllers
 
+import gtm.{ EcommerceItem, ViewItem }
+
 import javax.inject._
 import play.api._
 import play.api.libs.json.Json
@@ -24,7 +26,10 @@ class HomeController @Inject() (val controllerComponents: ControllerComponents) 
     itemStore.find(_.id == id).fold {
       NotFound(views.html.not_found())
     } { item =>
-      Ok(views.html.item_detail(item))
+      val ecommerceItems = EcommerceItem(item.name, item.id, item.value) :: Nil
+      val viewItem = ViewItem(items = ecommerceItems)
+
+      Ok(views.html.item_detail(item, viewItem))
     }
   }
 }
@@ -32,5 +37,5 @@ class HomeController @Inject() (val controllerComponents: ControllerComponents) 
 case class Item(
     id: Long,
     name: String,
-    value: BigDecimal
+    value: Long
 )
