@@ -1,0 +1,11 @@
+@(item: Item, ecommerce: gtm.GTM)
+
+@main(s"商品詳細 : ${item.name}") {
+    <h1>商品詳細 : @{item.name}</h1>
+    <p>価格 : @{item.value}円</p>
+    <a href="/items">商品一覧</a>
+    <script>
+        dataLayer.push({ ecommerce: null });
+        dataLayer.push(@Html(ecommerce.toJsonString));
+    </script>
+}

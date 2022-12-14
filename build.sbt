@@ -1,4 +1,6 @@
-name := """play-api-docs"""
+import scalariform.formatter.preferences._
+
+name := """try-ga4-play"""
 organization := "com.github.ishikawawawa"
 
 version := "1.0-SNAPSHOT"
@@ -19,17 +21,17 @@ libraryDependencies ++= Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
 )
 
+// plugin settings
+
+enablePlugins(ScalikejdbcPlugin)
+
+scalariformPreferences := scalariformPreferences.value
+  .setPreference(AlignSingleLineCaseStatements, true)
+  .setPreference(DoubleIndentConstructorArguments, true)
+  .setPreference(DanglingCloseParenthesis, Preserve)
+
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.github.ishikawawawa.controllers._"
 
 // Adds additional packages into conf/routes
 // play.sbt.routes.RoutesKeys.routesImport += "com.github.ishikawawawa.binders._"
-
-ThisBuild / scalafixScalaBinaryVersion := CrossVersion.binaryScalaVersion(scalaVersion.value)
-ThisBuild / semanticdbEnabled := true
-ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
-ThisBuild / scalafmtOnCompile := true
-ThisBuild / Compile / scalacOptions ++= List(
-  "-Ywarn-unused",
-  "-Yrangepos"
-)
